@@ -13,32 +13,31 @@ Feel free to contact me with any questions, suggestions, or corrections!
 Email: vikaschowdhury.p@gmail.com
 """
 
-import time
-import pandas as pd
-import os
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
-# Today's date
-date = (time.strftime("%Y-%m-%d"))
+categories = ['Mathematics','Statistics','Computer Science',
+              'Machine Learning', 'Communication','Visualization','Domain Expertise']
 
-# Your info goes here.
-name = 'Sai Vikas Potluri' # Put your name here.
-bar_data_labels = ['Mathematics', 'Statistics', 'Computer Science', 'Machine Learning', 'Communication', 'Visualization', 'Domain Expertise'] # These are the Data Science areas suggested in Doing Data Science.
-bar_data = [60, 70, 30, 70, 60, 50, 50] # Rate each skill from 0 to 100. 
-bar_data = pd.DataFrame(bar_data) # Put your data into a dataframe
+fig = go.Figure()
 
-# Create directory for Data Science profile
-if not os.path.exists("%s_Data_Science_Profile" % name):
-    os.makedirs("%s_Data_Science_Profile" % name)
-
-# Create the plot
-bar_data.plot(kind='bar', ylim=[0,100], legend=False, figsize=[20,10]).set_xticklabels(labels=bar_data_labels, rotation=0, fontsize=14)
-plt.title("%s's Data Science Profile on %s" % (name, date), fontsize=20)
-plt.xlabel('Skill', fontsize=18)
-plt.ylabel("Rating (0 to 100)", fontsize=18)
-plt.savefig('%s_Data_Science_Profile/%s_Data_Science_Profile_%s.png' % (name, name, date))  # Save the plot within a folder in your working directory
+fig.add_trace(go.Scatterpolar(
+      r=[6, 7, 2, 7, 6,5,5],
+      theta=categories,
+      fill='toself',
+      name='Product A'
+))
 
 
+fig.update_layout(
+  polar=dict(
+    radialaxis=dict(
+      visible=True,
+      range=[0, 10]
+    )),
+  showlegend=False
+)
+
+fig.show()
 # In[ ]:
 
 
